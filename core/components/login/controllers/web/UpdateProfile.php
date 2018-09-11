@@ -59,6 +59,7 @@ class LoginUpdateProfileController extends LoginController {
             'useExtended' => true,
             'user' => '',
             'validate' => '',
+            'errorDelimited' => '<br>'
         ));
     }
 
@@ -205,7 +206,7 @@ class LoginUpdateProfileController extends LoginController {
             $errors = array();
 			$es = $this->validator->getErrors();
 			foreach ($es as $key => $error) {
-				$errors['message'] .= $error . '<br>';
+				$errors['message'] .= $error . $this->getProperty('errorDelimited');
 			}
 			$this->modx->toPlaceholder('message', $errors['message'], $placeholderPrefix.'error');
         } else {
